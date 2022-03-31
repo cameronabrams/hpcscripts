@@ -66,7 +66,7 @@ unset -v latest
 for file in dones*; do
   [[ $file -nt $latest ]] && latest=$file
 done
-if [ -z ${latest+x} ]; then
+if [[ -v latest ]]; then
     # a listfile is identified, take the last entry
     lastone=`tail -1 $latest`
     lastonepath=${OWD}/${lastone}
