@@ -1,0 +1,5 @@
+gromacs: {
+   gmx: '/app/gromacs/gromacs-2022/bin/gmx_mpi'
+   mdrun: 'mpiexec -n 128 /app/gromacs/gromacs-2022/bin_cpu/gmx_mpi mdrun -ntomp 1'
+   options: '-quiet -nobackup'
+}
