@@ -1,0 +1,6 @@
+gromacs: {
+   gmx: '/p/home/cfa/opt/gromacs/2022.1/bin/gmx_mpi',
+   mdrun: 'aprun -n 44 -N 44 /p/home/cfa/opt/gromacs/2022.1/bin/gmx_mpi mdrun',
+   options: '-quiet -nobackup',
+   mdrun_single_molecule: 'aprun -n 1 /p/home/cfa/opt/gromacs/2022.1/bin/gmx_mpi mdrun'
+}
