@@ -1,4 +1,5 @@
-#SBATCH --account=ARLAP35100034
+#!/bin/bash
+#SBATCH --account=ARLAP26313136
 #SBATCH --partition=general
 #SBATCH --qos=standard
 #SBATCH --nodes=2
