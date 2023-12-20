@@ -19,5 +19,8 @@ NAMD2=/p/home/cfabrams/build/NAMD_2.14_Source/Linux-x86_64-icc/namd2
 
 CONFIG=my.namd
 LOG=my.log
+NNODES=2
+NCPUPERNODE=128
+NCPU=$((NCPUPERNODE*NNODES))
 
 $CHARMRUN +p${NCPU} $NAMD2 $CONFIG > $LOG

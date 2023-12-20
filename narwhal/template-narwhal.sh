@@ -2,7 +2,7 @@
 # This is a template qsub script for narwhal.navydsrc.hpc.mil
 # Cameron F. Abrams cfa22@drexel.edu
 
-#PBS -A ARLAP35100034
+#PBS -A ARLAP26313136
 #PBS -q standard
 #PBS -l select=6:ncpus=128:mpiprocs=1
 #PBS -l walltime=15:00:00
