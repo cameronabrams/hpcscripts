@@ -114,7 +114,7 @@ if __name__=='__main__':
     print(f'                     last_write_step {last_write_step}')
     
     if run:
-        run_target_numsteps=firsttimestep+run
+        run_target_numsteps=num_steps=firsttimestep+run
     elif numsteps:
         run_target_numsteps=numsteps
 
