@@ -125,6 +125,7 @@ if __name__=='__main__':
     else:
         print(f'          run terminated prematurely 😠')
     stepsrequested=stepsleft
+    numsteps=run_target_numsteps
     if args.new_numsteps:
         if args.new_numsteps<last_write_step:
             raise Exception(f'You have requested a maximum total number of steps ({args.new_numsteps}) that is less than the step of the last write ({last_write_step})')
