@@ -12,6 +12,8 @@
 #
 # Cameron Abrams cfa22@drexel.edu
 # 2020-2021
+#
+# Note: This script has been replaced with the renamd.py python script.  Use that one.
 
 banner () {
     echo "# prep_namd_restart.sh: NAMD continuation utility -- Cameron F Abrams -- cfa22@drexel.edu"
