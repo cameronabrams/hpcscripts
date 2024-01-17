@@ -16,7 +16,19 @@ def get_config_val(Clines,keyword,type=int):
 def myfc(filename):
     return '😎' if os.path.exists(filename) else '😠'
 
-
+def hhmmss(**kwargs):
+    totalsec=kwargs.get('seconds',0)
+    totalhours=kwargs.get('hours',0.0)
+    totalminutes=kwargs.get('minutes',0.0)
+    if totalsec:
+        wholemin=totalsec//60
+        remsec=totalsec%60
+        wholehr=wholemin//60
+        remmin=wholemin%60
+        return f'{wholehr:02d}:{remmin:02d}:{remsec:02d}'
+    else:
+        return "not yet"
+    
 config_ignores=['#','run','set outputname'] # purge these!
 config_replaces=['bincoordinates','binvelocities','extendedsystem','firsttimestep','numsteps']
 
@@ -44,7 +56,14 @@ if __name__=='__main__':
     with open(args.l,'r') as f:
         loglines=f.read().split('\n')
         print(f'{args.l}: {len(loglines)} lines')
-
+    
+    wallsec_per_timestep=0.0
+    nsamp=0
+    for l in loglines:
+        if l.startswith('TIMING'):
+            wallsec_per_timestep+=float(l.split()[4][:-5])
+            nsamp+=1
+    wallsec_per_timestep/=nsamp
     outbasename,outext=os.path.splitext(args.o)
 
     # input config parsing
@@ -120,6 +139,7 @@ if __name__=='__main__':
 
     stepsleft=run_target_numsteps-last_write_step
     print(f'                          steps left {stepsleft}')
+    print(f'          wall seconds per time step {wallsec_per_timestep}')
     if run_finished:
         print(f'                        run finished 😎')
     else:
@@ -139,6 +159,7 @@ if __name__=='__main__':
     if stepsrequested==0:
         print(f'No more steps needed or requested')
     else:
+        wall_sec_requested=int(wallsec_per_timestep*stepsrequested)
         firsttimestep=last_write_step
         if run_finished:
             bincoordinates=f'{outputname}.coor'
@@ -191,7 +212,7 @@ if __name__=='__main__':
             if not replaced['numsteps']:
                 f.write(f'numsteps {numsteps}\n')
         print(f'Generated {args.o}.')
-
+        print(f'Approx. wall hours needed: {hhmmss(seconds=wall_sec_requested)}')
         if args.tarball:
             FILES.append(args.o)
             c=f'tar zvcf {outbasename}.tgz '+' '.join(FILES)
